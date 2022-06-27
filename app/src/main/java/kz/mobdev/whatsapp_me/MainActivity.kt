@@ -46,7 +46,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleNumberAndOpenWhatsApp(number: String?) {
-        val normalizedNumber = PhoneNumberUtils.normalizeNumber(number)
+        var normalizedNumber = PhoneNumberUtils.normalizeNumber(number).apply {  }
+        if (normalizedNumber.startsWith("8")) {
+            normalizedNumber = normalizedNumber.replaceFirst("8", "+7")
+        }
         if (!number.isNullOrBlank() && PhoneNumberUtils.isGlobalPhoneNumber(normalizedNumber)) {
             openWhatsApp(normalizedNumber)
         } else {
