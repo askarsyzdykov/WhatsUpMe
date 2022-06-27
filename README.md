@@ -5,4 +5,5 @@
 
 ** Как пользоваться:
 
-![ezgif-1-d1f0f7f576](https://user-images.githubusercontent.com/3222305/175907477-e0badfe8-1081-4fd4-9809-8c1360deba47.gif)
+https://user-images.githubusercontent.com/3222305/175918134-fb884281-50a6-4fb7-8104-f7f53dc3eb45.mp4
+
