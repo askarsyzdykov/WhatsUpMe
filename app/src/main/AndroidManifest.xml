@@ -16,7 +16,8 @@
         <activity
             android:name="kz.mobdev.whatsapp_me.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.MyApplication.NoActionBar">
+            android:theme="@style/Theme.MyApplication.NoActionBar"
+            android:windowSoftInputMode="stateVisible">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

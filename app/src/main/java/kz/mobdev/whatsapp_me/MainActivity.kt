@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         binding.openButton.setOnClickListener {
             handleNumberAndOpenWhatsApp(binding.phoneEditText.text.toString())
         }
+
+        binding.phoneEditText.requestFocus()
     }
 
     private fun handleIntent(intent: Intent?) {
