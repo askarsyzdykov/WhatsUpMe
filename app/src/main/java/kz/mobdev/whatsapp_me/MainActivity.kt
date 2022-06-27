@@ -31,30 +31,48 @@ class MainActivity : AppCompatActivity() {
         binding.phoneEditText.requestFocus()
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        handleIntent(intent)
+        super.onNewIntent(intent)
+    }
+
     private fun handleIntent(intent: Intent?) {
         if (intent?.action == null) {
             return
         }
         when (intent.action) {
+            Intent.ACTION_SEND -> {
+                val number = intent.getStringExtra(Intent.EXTRA_TEXT)
+                handleNumberAndOpenWhatsApp(number)
+            }
             Intent.ACTION_PROCESS_TEXT ->
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     val number = intent.getStringExtra(Intent.EXTRA_PROCESS_TEXT)
                     handleNumberAndOpenWhatsApp(number)
-                    finish()
                 }
         }
     }
 
     private fun handleNumberAndOpenWhatsApp(number: String?) {
-        var normalizedNumber = PhoneNumberUtils.normalizeNumber(number).apply {  }
+        if (number.isNullOrBlank() || number.any { it.isLetter() }) {
+            showError()
+            return
+        }
+        var normalizedNumber = PhoneNumberUtils.normalizeNumber(number)
         if (normalizedNumber.startsWith("8")) {
             normalizedNumber = normalizedNumber.replaceFirst("8", "+7")
         }
-        if (!number.isNullOrBlank() && PhoneNumberUtils.isGlobalPhoneNumber(normalizedNumber)) {
+        if (PhoneNumberUtils.isGlobalPhoneNumber(normalizedNumber)) {
             openWhatsApp(normalizedNumber)
         } else {
-            Toast.makeText(this, "Wrong phone number", Toast.LENGTH_SHORT).show()
+            showError()
         }
+        binding.phoneEditText.setText(number)
+    }
+
+    private fun showError() {
+        Toast.makeText(this, "Не удалось распознать номер, введите вручную", Toast.LENGTH_LONG)
+            .show()
     }
 
     private fun openWhatsApp(number: String) {

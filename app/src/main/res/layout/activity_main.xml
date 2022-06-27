@@ -27,20 +27,26 @@
         android:padding="16dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <EditText
-            android:id="@+id/phoneEditText"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="Input/paste phone number"
-            android:inputType="phone"
-            android:textColor="@color/black"
-            android:textColorHint="#ccc"
             android:layout_marginBottom="300dp"
+            app:helperText="Введите/вставьте номер телефона"
+            app:helperTextTextAppearance="@style/HelperTextAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phoneEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:inputType="phone"
+                tools:text="123456789" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/openButton"
@@ -51,7 +57,7 @@
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/phoneEditText" />
+            app:layout_constraintTop_toBottomOf="@id/phoneTextInputLayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
