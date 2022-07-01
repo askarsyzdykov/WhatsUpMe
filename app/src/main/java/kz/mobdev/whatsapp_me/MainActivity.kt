@@ -73,7 +73,12 @@ class MainActivity : AppCompatActivity() {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus && !hasPhoneInIntent) {
             getTextFromClipboard()?.let {
-                binding.phoneEditText.setText(it)
+                PhoneUtils.getNormalizedPhoneNumber(
+                    it,
+                    onSuccess = { binding.phoneEditText.setText(it) },
+                    onError = {}
+                )
+
             }
         }
     }
