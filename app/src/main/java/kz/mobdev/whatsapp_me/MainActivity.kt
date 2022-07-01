@@ -1,18 +1,49 @@
 package kz.mobdev.whatsapp_me
 
+import android.app.Notification
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.telephony.PhoneNumberUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kz.mobdev.whatsapp_me.databinding.ActivityMainBinding
 
+const val NOTIFICATION_CHANNEL_ID = "notification_channel_id"
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        fun showNotification(context: Context) {
+            val pendingIntent =
+                PendingIntent.getActivity(
+                    context,
+                    0,
+                    Intent(context, MainActivity::class.java),
+                    FLAG_IMMUTABLE
+                )
+            val notification =
+                Notification.Builder(context, NOTIFICATION_CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setContentTitle("Open a chat in WhatsApp")
+                    .setContentText("Paste phone number from the clipboard")
+                    .setOngoing(true)
+                    .setContentIntent(pendingIntent)
+                    .build()
+            val manager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            manager.notify(1, notification)
+        }
+    }
+
     private lateinit var binding: ActivityMainBinding
+
+    private val clipBoardManager by lazy { getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
+
+    private var hasPhoneInIntent = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,63 +53,66 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        handleIntent(intent)
+        hasPhoneInIntent = handleIntent(intent)
 
         binding.openButton.setOnClickListener {
             handleNumberAndOpenWhatsApp(binding.phoneEditText.text.toString())
         }
 
         binding.phoneEditText.requestFocus()
+
+        showNotification(this)
     }
 
     override fun onNewIntent(intent: Intent?) {
-        handleIntent(intent)
+        hasPhoneInIntent = handleIntent(intent)
         super.onNewIntent(intent)
     }
 
-    private fun handleIntent(intent: Intent?) {
-        if (intent?.action == null) {
-            return
-        }
-        when (intent.action) {
-            Intent.ACTION_SEND -> {
-                val number = intent.getStringExtra(Intent.EXTRA_TEXT)
-                handleNumberAndOpenWhatsApp(number)
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus && !hasPhoneInIntent) {
+            getTextFromClipboard()?.let {
+                binding.phoneEditText.setText(it)
             }
-            Intent.ACTION_PROCESS_TEXT ->
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    val number = intent.getStringExtra(Intent.EXTRA_PROCESS_TEXT)
-                    handleNumberAndOpenWhatsApp(number)
-                }
         }
     }
 
-    private fun handleNumberAndOpenWhatsApp(number: String?) {
-        if (number.isNullOrBlank() || number.any { it.isLetter() }) {
-            showError()
-            return
+    private fun handleIntent(intent: Intent?): Boolean {
+        if (intent?.action == null) {
+            return false
         }
-        var normalizedNumber = PhoneNumberUtils.normalizeNumber(number)
-        if (normalizedNumber.startsWith("8")) {
-            normalizedNumber = normalizedNumber.replaceFirst("8", "+7")
+        when (intent.action) {
+            Intent.ACTION_SEND ->
+                intent.getStringExtra(Intent.EXTRA_TEXT)?.let { number ->
+                    handleNumberAndOpenWhatsApp(number)
+                    return true
+                }
+            Intent.ACTION_PROCESS_TEXT ->
+                intent.getStringExtra(Intent.EXTRA_PROCESS_TEXT)?.let { number ->
+                    handleNumberAndOpenWhatsApp(number)
+                    return true
+                }
         }
-        if (PhoneNumberUtils.isGlobalPhoneNumber(normalizedNumber)) {
-            openWhatsApp(normalizedNumber)
-        } else {
-            showError()
-        }
+        return false
+    }
+
+    private fun handleNumberAndOpenWhatsApp(number: String) {
+        PhoneUtils.getNormalizedPhoneNumber(
+            number,
+            onSuccess = { PhoneUtils.openWhatsApp(this, it) },
+            onError = { showError() }
+        )
         binding.phoneEditText.setText(number)
     }
 
     private fun showError() {
-        Toast.makeText(this, "Не удалось распознать номер, введите вручную", Toast.LENGTH_LONG)
+        Toast.makeText(this, "Не удалось распознать номер, попробуйте изменить", Toast.LENGTH_LONG)
             .show()
     }
 
-    private fun openWhatsApp(number: String) {
-        val url = "https://api.whatsapp.com/send?phone=$number"
-        val intent = Intent(Intent.ACTION_VIEW)
-            .setData(Uri.parse(url))
-        startActivity(intent)
+    private fun getTextFromClipboard(): String? {
+        val item = clipBoardManager.primaryClip?.getItemAt(0)
+        return item?.text?.toString()
     }
 }
