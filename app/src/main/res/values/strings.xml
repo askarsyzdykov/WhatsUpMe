@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">WhatsUpMe</string>
+    <string name="input_or_paste_phone_number">Enter or paste a phone number</string>
+    <string name="error_unable_to_normalize_phone_number">Unable to parse the phone number, try change it</string>
+    <string name="open_whatsapp">Start chat in WhatsApp</string>
+    <string name="notification_title">Open a chat in WhatsApp</string>
+    <string name="notification_text">Paste phone number from the clipboard</string>
 </resources>

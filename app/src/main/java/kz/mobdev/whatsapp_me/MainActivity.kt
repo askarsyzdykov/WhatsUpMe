@@ -10,6 +10,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import kz.mobdev.whatsapp_me.databinding.ActivityMainBinding
 
 const val NOTIFICATION_CHANNEL_ID = "notification_channel_id"
@@ -26,10 +27,10 @@ class MainActivity : AppCompatActivity() {
                     FLAG_IMMUTABLE
                 )
             val notification =
-                Notification.Builder(context, NOTIFICATION_CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setContentTitle("Open a chat in WhatsApp")
-                    .setContentText("Paste phone number from the clipboard")
+                NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_notification)
+                    .setContentTitle(context.getString(R.string.notification_title))
+                    .setContentText(context.getString(R.string.notification_text))
                     .setOngoing(true)
                     .setContentIntent(pendingIntent)
                     .build()
@@ -112,7 +113,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showError() {
-        Toast.makeText(this, "Не удалось распознать номер, попробуйте изменить", Toast.LENGTH_LONG)
+        Toast.makeText(this, getString(R.string.error_unable_to_normalize_phone_number), Toast.LENGTH_LONG)
             .show()
     }
 

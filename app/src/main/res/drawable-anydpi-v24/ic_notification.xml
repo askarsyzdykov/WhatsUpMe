@@ -1,13 +1,14 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
-  <group android:scaleX="0.1368"
-      android:scaleY="0.1368"
-      android:translateX="33.48"
-      android:translateY="33.48">
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="#FFFFFF">
+  <group android:scaleX="0.06216216"
+      android:scaleY="0.06216216"
+      android:translateX="2.6756756"
+      android:translateY="2.6756756">
     <path
         android:pathData="M6.94,193.93C10.78,193.93 13.89,190.49 13.89,186.25V29.68C13.89,21.79 19.67,15.37 26.78,15.37H293.05C296.89,15.37 300,11.93 300,7.68C300,3.44 296.89,0 293.05,0H26.78C12.02,-0 0,13.31 0,29.68V186.25C0,190.49 3.11,193.93 6.94,193.93Z">
       <aapt:attr name="android:fillColor">

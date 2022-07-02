@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WhatsUpMe</string>
+    <string name="input_or_paste_phone_number">Введите или вставьте номер телефона</string>
+    <string name="error_unable_to_normalize_phone_number">Не удалось распознать номер, попробуйте изменить</string>
+    <string name="open_whatsapp">Начать чат в WhatsApp</string>
+    <string name="notification_title">Открыть WhatsApp</string>
+    <string name="notification_text">Вставить скопированный номер</string>
+</resources>

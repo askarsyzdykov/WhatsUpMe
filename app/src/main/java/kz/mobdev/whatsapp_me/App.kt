@@ -11,7 +11,9 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        initNotificationChannel()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            initNotificationChannel()
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

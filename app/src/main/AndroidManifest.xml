@@ -6,12 +6,12 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".App"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
@@ -20,6 +20,7 @@
             android:name="kz.mobdev.whatsapp_me.MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
+            android:screenOrientation="fullSensor"
             android:theme="@style/Theme.MyApplication.NoActionBar"
             android:windowSoftInputMode="stateVisible">
 
