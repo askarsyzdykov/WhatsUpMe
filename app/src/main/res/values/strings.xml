@@ -5,4 +5,5 @@
     <string name="open_whatsapp">Start chat in WhatsApp</string>
     <string name="notification_title">Open a chat in WhatsApp</string>
     <string name="notification_text">Paste phone number from the clipboard</string>
+    <string name="context_menu_open_in_whatsapp">Open WhatsApp</string>
 </resources>

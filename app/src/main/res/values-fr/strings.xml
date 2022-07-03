@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">WhatsUpMe</string>
+    <string name="input_or_paste_phone_number">Entrez ou collez un numéro de téléphone</string>
+    <string name="error_unable_to_normalize_phone_number">Impossible d\'analyser le numéro de téléphone, essayez de le changer</string>
+    <string name="open_whatsapp">Commencez à discuter dans WhatsApp</string>
+    <string name="notification_title">Ouvrez une conversation dans WhatsApp</string>
+    <string name="notification_text">Collez le numéro de téléphone à partir du presse-papiers</string>
+    <string name="context_menu_open_in_whatsapp">Ouvert WhatsApp</string>
+</resources>

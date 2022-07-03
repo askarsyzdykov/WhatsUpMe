@@ -5,4 +5,5 @@
     <string name="open_whatsapp">Начать чат в WhatsApp</string>
     <string name="notification_title">Открыть WhatsApp</string>
     <string name="notification_text">Вставить скопированный номер</string>
+    <string name="context_menu_open_in_whatsapp">Открыть в WhatsApp</string>
 </resources>

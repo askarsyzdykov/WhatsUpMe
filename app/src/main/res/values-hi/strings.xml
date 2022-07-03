@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">WhatsUpMe</string>
+    <string name="input_or_paste_phone_number">फ़ोन नंबर दर्ज करें या पेस्ट करें</string>
+    <string name="error_unable_to_normalize_phone_number">फोन नंबर को पार्स करने में असमर्थ, इसे बदलने का प्रयास करें</string>
+    <string name="open_whatsapp">व्हाट्सएप में चैट शुरू करें</string>
+    <string name="notification_title">व्हाट्सएप में एक चैट खोलें</string>
+    <string name="notification_text">क्लिपबोर्ड से फोन नंबर पेस्ट करें</string>
+    <string name="context_menu_open_in_whatsapp">व्हाट्सएप खोलें</string>
+</resources>
