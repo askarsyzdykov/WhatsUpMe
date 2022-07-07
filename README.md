@@ -1,7 +1,5 @@
 ** Как установить:
-- скачиваете app-release.apk, который находится в папке apk (Нужно нажать на View raw) или нажмите [сюда](https://github.com/askarsyzdykov/WhatsUpMe/raw/main/apk/app-release.apk)
-- находите в загрузках этот файл и открываете его
-- система будет ругаться, что приложение может быть небезопасным, но вы смелые, а я честный, поэтому разрешаете установку
+- установить из Google play по [этой ссылке](https://play.google.com/store/apps/details?id=kz.mobdev.whatsapp_me)
 
 ** Как пользоваться:
 
