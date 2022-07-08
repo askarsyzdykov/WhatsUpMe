@@ -6,4 +6,6 @@
     <string name="notification_title">Открыть WhatsApp</string>
     <string name="notification_text">Вставить скопированный номер</string>
     <string name="context_menu_open_in_whatsapp">Открыть в WhatsApp</string>
+    <string name="share">Поделиться</string>
+    <string name="share_text">Я использую WhatsUp Me, чтобы общаться с несохраненными контактами. Скачай в Google Play - https://play.google.com/store/apps/details?id=kz.mobdev.whatsapp_me</string>
 </resources>

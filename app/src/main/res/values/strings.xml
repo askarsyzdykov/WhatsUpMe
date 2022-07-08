@@ -6,4 +6,6 @@
     <string name="notification_title">Open a chat in WhatsApp</string>
     <string name="notification_text">Paste phone number from the clipboard</string>
     <string name="context_menu_open_in_whatsapp">Open WhatsApp</string>
+    <string name="share">Share</string>
+    <string name="share_text">I\'m using WhatsUp Me to write to the not saved contacts. Get it on Google Play - https://play.google.com/store/apps/details?id=kz.mobdev.whatsapp_me</string>
 </resources>

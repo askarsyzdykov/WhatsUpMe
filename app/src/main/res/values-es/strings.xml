@@ -6,4 +6,5 @@
     <string name="notification_title">Abra un chat en WhatsApp</string>
     <string name="notification_text">Pegar el número de teléfono del portapapeles</string>
     <string name="context_menu_open_in_whatsapp">Abrir WhatsApp</string>
+    <string name="share">Cuota</string>
 </resources>

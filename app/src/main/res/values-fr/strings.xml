@@ -6,4 +6,5 @@
     <string name="notification_title">Ouvrez une conversation dans WhatsApp</string>
     <string name="notification_text">Collez le numéro de téléphone à partir du presse-papiers</string>
     <string name="context_menu_open_in_whatsapp">Ouvert WhatsApp</string>
+    <string name="share">Partager</string>
 </resources>

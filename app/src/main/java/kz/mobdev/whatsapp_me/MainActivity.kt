@@ -1,6 +1,5 @@
 package kz.mobdev.whatsapp_me
 
-import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
@@ -8,6 +7,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
                     .setContentTitle(context.getString(R.string.notification_title))
                     .setContentText(context.getString(R.string.notification_text))
                     .setOngoing(true)
+                    .setSilent(true)
                     .setContentIntent(pendingIntent)
                     .build()
             val manager =
@@ -53,6 +54,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+        binding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.shareAction -> {
+                    val intent = Intent(Intent.ACTION_SEND)
+                        .setType("text/plain")
+                        .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
+                        .putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text))
+                    startActivity(intent)
+                }
+                else -> {
+                    // Ignore
+                }
+            }
+            return@setOnMenuItemClickListener true
+        }
 
         hasPhoneInIntent = handleIntent(intent)
 
@@ -63,6 +79,11 @@ class MainActivity : AppCompatActivity() {
         binding.phoneEditText.requestFocus()
 
         showNotification(this)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
     }
 
     override fun onNewIntent(intent: Intent?) {

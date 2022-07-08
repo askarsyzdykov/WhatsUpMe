@@ -6,4 +6,5 @@
     <string name="notification_title">Abra um bate -papo no WhatsApp</string>
     <string name="notification_text">Cole o número de telefone da área de transferência</string>
     <string name="context_menu_open_in_whatsapp">Abra o WhatsApp</string>
+    <string name="share">Compartilhar</string>
 </resources>

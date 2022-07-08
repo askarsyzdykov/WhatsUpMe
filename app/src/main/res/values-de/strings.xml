@@ -6,4 +6,5 @@
     <string name="notification_title">Öffnen Sie einen Chat in WhatsApp</string>
     <string name="notification_text"> Einfügen der Telefonnummer aus der Zwischenablage</string>
     <string name="context_menu_open_in_whatsapp">Öffne WhatsApp</string>
+    <string name="share">Teilen</string>
 </resources>

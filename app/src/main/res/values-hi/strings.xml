@@ -6,4 +6,5 @@
     <string name="notification_title">व्हाट्सएप में एक चैट खोलें</string>
     <string name="notification_text">क्लिपबोर्ड से फोन नंबर पेस्ट करें</string>
     <string name="context_menu_open_in_whatsapp">व्हाट्सएप खोलें</string>
+    <string name="share">शेयर करना</string>
 </resources>
