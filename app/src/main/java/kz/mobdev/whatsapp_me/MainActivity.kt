@@ -134,12 +134,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showError() {
-        Toast.makeText(this, getString(R.string.error_unable_to_normalize_phone_number), Toast.LENGTH_LONG)
+        Toast.makeText(
+            this,
+            getString(R.string.error_unable_to_normalize_phone_number),
+            Toast.LENGTH_LONG
+        )
             .show()
     }
 
     private fun getTextFromClipboard(): String? {
         val item = clipBoardManager.primaryClip?.getItemAt(0)
+        clipBoardManager.clearPrimaryClip()
         return item?.text?.toString()
     }
 }
