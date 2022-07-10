@@ -1,5 +1,5 @@
 ** Как установить:
-- установить из Google play по [этой ссылке](https://play.google.com/store/apps/details?id=kz.mobdev.whatsapp_me)
+- устано вить из Google play по [этой ссылке](https://play.google.com/store/apps/details?id=kz.mobdev.whatsapp_me)
 
 ** Как пользоваться:
 
