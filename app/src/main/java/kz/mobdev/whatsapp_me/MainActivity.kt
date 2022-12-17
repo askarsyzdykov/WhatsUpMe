@@ -6,6 +6,7 @@ import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.widget.Toast
@@ -144,7 +145,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun getTextFromClipboard(): String? {
         val item = clipBoardManager.primaryClip?.getItemAt(0)
-        clipBoardManager.clearPrimaryClip()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            clipBoardManager.clearPrimaryClip()
+        }
         return item?.text?.toString()
     }
 }
