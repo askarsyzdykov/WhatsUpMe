@@ -7,4 +7,5 @@
     <string name="notification_text">Collez le numéro de téléphone à partir du presse-papiers</string>
     <string name="context_menu_open_in_whatsapp">Ouvert WhatsApp</string>
     <string name="share">Partager</string>
+    <string name="share_text">J’utilise WhatsUp Me pour écrire à des contacts non enregistrés. Téléchargez-la sur Google Play : https://play.google.com/store/apps/details?id=kz.mobdev.whatsapp_me</string>
 </resources>

@@ -7,4 +7,5 @@
     <string name="notification_text"> Einfügen der Telefonnummer aus der Zwischenablage</string>
     <string name="context_menu_open_in_whatsapp">Öffne WhatsApp</string>
     <string name="share">Teilen</string>
+    <string name="share_text">Ich verwende WhatsUp Me, um nicht gespeicherten Kontakten zu schreiben. Jetzt bei Google Play herunterladen: https://play.google.com/store/apps/details?id=kz.mobdev.whatsapp_me</string>
 </resources>

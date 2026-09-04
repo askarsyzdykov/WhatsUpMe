@@ -1,17 +1,26 @@
 package kz.mobdev.whatsapp_me
 
+import android.Manifest
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import kz.mobdev.whatsapp_me.databinding.ActivityMainBinding
 
 const val NOTIFICATION_CHANNEL_ID = "notification_channel_id"
@@ -20,6 +29,10 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         fun showNotification(context: Context) {
+            if (!NotificationManagerCompat.from(context).areNotificationsEnabled()) {
+                return
+            }
+
             val pendingIntent =
                 PendingIntent.getActivity(
                     context,
@@ -44,6 +57,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private val notificationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) {
+                showNotification(this)
+            }
+        }
+
     private val clipBoardManager by lazy { getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
 
     private var hasPhoneInIntent = false
@@ -51,8 +71,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        applyWindowInsets()
 
         setSupportActionBar(binding.toolbar)
         binding.toolbar.setOnMenuItemClickListener {
@@ -79,7 +102,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.phoneEditText.requestFocus()
 
-        showNotification(this)
+        requestNotificationPermissionIfNeeded()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -141,6 +164,34 @@ class MainActivity : AppCompatActivity() {
             Toast.LENGTH_LONG
         )
             .show()
+    }
+
+    private fun requestNotificationPermissionIfNeeded() {
+        if (
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) !=
+            PackageManager.PERMISSION_GRANTED
+        ) {
+            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        } else {
+            showNotification(this)
+        }
+    }
+
+    private fun applyWindowInsets() {
+        val appBarInitialTop = binding.appBar.paddingTop
+        val contentInitialBottom = binding.content.paddingBottom
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, windowInsets ->
+            val systemBars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val ime = windowInsets.getInsets(WindowInsetsCompat.Type.ime())
+            binding.appBar.updatePadding(top = appBarInitialTop + systemBars.top)
+            binding.content.updatePadding(
+                bottom = contentInitialBottom + maxOf(systemBars.bottom, ime.bottom)
+            )
+            windowInsets
+        }
+        ViewCompat.requestApplyInsets(binding.root)
     }
 
     private fun getTextFromClipboard(): String? {

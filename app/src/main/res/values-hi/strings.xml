@@ -7,4 +7,5 @@
     <string name="notification_text">क्लिपबोर्ड से फोन नंबर पेस्ट करें</string>
     <string name="context_menu_open_in_whatsapp">व्हाट्सएप खोलें</string>
     <string name="share">शेयर करना</string>
+    <string name="share_text">मैं सेव न किए गए संपर्कों को संदेश भेजने के लिए WhatsUp Me का उपयोग करता हूँ। इसे Google Play से डाउनलोड करें: https://play.google.com/store/apps/details?id=kz.mobdev.whatsapp_me</string>
 </resources>
